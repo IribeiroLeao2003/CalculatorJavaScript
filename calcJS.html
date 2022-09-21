@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html> 
+    <title>Calculator</title>
     <head> 
         <style>  
             table {
@@ -10,14 +11,17 @@
             } 
 
             .btn-group button {
-                background-color: blue; /* Green background */
-                border: 1px solid darkblue; /* Green border */
-                color: black; /* White text */
-                padding: 10px 24px; /* Some padding */ 
+                background-color: blue;
+                border: 1px solid darkblue; 
+                color: white; 
+                padding: 10px 24px;  
                 width: 100px;
-                cursor: pointer; /* Pointer/hand icon */
-                float: left; /* Float the buttons side by side */
-            }  
+                cursor: pointer; 
+                float: left; 
+            }   
+            .btn-group button:hover {
+                background-color: lightblue;
+            } 
             input[type="text"] {
                 padding: 20px 30px;
                 font-size: 24px;
@@ -25,7 +29,16 @@
                 width: 340px; 
                 border: none;
                 
-            }
+            } 
+            .n0 {
+                background-color: blue;
+                border: 1px solid darkblue; 
+                color: white; 
+                padding: 10px 24px;  
+                width: 100px;
+                cursor: pointer; 
+                float: left; 
+            }  
         </style>
     </head>
 <body>   
@@ -37,49 +50,102 @@
     <tr>  
         <td colspan= "3">
             <div class = "btn-group">  
-                <button>C</button> 
-                <button>+/-</button> 
-                <button>%</button> 
-                <button>÷</button>  
+                <button onclick= "disNumber('C')">C</button> 
+                <button onclick= "disNumber('+/-')">+/-</button> 
+                <button onclick= "disNumber('%')">%</button> 
+                <button onclick= "disNumber('÷')">÷</button>  
             </div> 
         </td>  
     </tr> 
     <tr>
         <td colspan="3">
             <div class = "btn-group">   
-                <button onclick= disNumber(7)>7</button> 
-                <button>8</button> 
-                <button>9</button> 
-                <button>X</button>
+                <button onclick= "disNumber('7')">7</button> 
+                <button onclick= "disNumber('8')">8</button> 
+                <button onclick= "disNumber('9')">9</button> 
+                <button onclick= "disNumber('X')">X</button>
             </div> 
         </td>  
     </tr> 
     <tr>
         <td colspan=3>
             <div class = "btn-group">   
-                <button>4</button> 
-                <button>5</button> 
-                <button>6</button> 
-                <button>-</button>
+                <button onclick= "disNumber('4')">4</button> 
+                <button onclick= "disNumber('5')">5</button> 
+                <button onclick= "disNumber('6')">6</button> 
+                <button onclick= "disNumber('-')">-</button>
             </div> 
         </td>  
     </tr> 
     <tr>
         <td colspan=3>
             <div class = "btn-group">   
-                <button>1</button> 
-                <button>2</button> 
-                <button>3</button> 
-                <button>+</button>
+                <button onclick= "disNumber('1')">1</button> 
+                <button onclick= "disNumber('2')">2</button> 
+                <button onclick= "disNumber('0')">3</button> 
+                <button onclick= "disNumber('+')">+</button>
+            </div>  
+        </td> 
+        
+    </tr> 
+    <tr>
+        <td colspan=3>
+            <div class = "btn-group">   
+                <button style="width: 200px" onclick="disNumber('0')">0</button>
+                <button onclick= "disNumber('.')">.</button> 
+                <button  onclick= "disNumber('=')">=</button>
             </div>  
         </td> 
         
     </tr>
     </table>
-    <script>  
-    function disNumber(value){ 
-        document.getElementById("display").value += val 
-    } 
+    <script>   
+    var num = 0;   
+    var finalR = 0; 
+    var oper = " "; 
+    function disNumber(value){  
+        if(!isNaN(value)){ 
+            document.getElementById("display").value += value;   
+            num = document.getElementById("display").value; 
+        }  else if (value == "+/-"){ 
+            num = num - (num * 2);  
+            document.getElementById("display").value = num; 
+        } else if (value == "C"){  
+            document.getElementById("display").value = " " 
+            num = 0; 
+        }else if(value == '.'){   
+            if(num.indexOf('.') == -1){ 
+                num = num.concat(".");
+                document.getElementById("display").value = num;
+            }
+        } else if (value == "+"){ 
+            num = document.getElementById("display").value;  
+            oper = "+";  
+            document.getElementById("display").value = " "  
+        } else if ( value == "-"){ 
+            num = document.getElementById("display").value;  
+            oper = "-";  
+            document.getElementById("display").value = " " 
+        } else if (value == "X"){ 
+            num = document.getElementById("display").value;  
+            oper = "X";  
+            document.getElementById("display").value = " " 
+        } else if (value == "÷"){ 
+            num = document.getElementById("display").value;  
+            oper = "÷";  
+            document.getElementById("display").value = " " 
+        } else if (value == "="){  
+
+            num2 = document.getElementById("display").value; 
+
+
+        }
+    
+
+        
+        
+    }  
+    
     
 
 

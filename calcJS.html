@@ -1,26 +1,36 @@
 <!DOCTYPE html>
 <html> 
     <title>Calculator</title>
-    <head> 
-        <style>  
+    <head>  
+        <style>   
+        
             table {
                 border: 3px solid whitesmoke; 
-                background-color: yellow; 
+                background-color: black; 
                 margin-left: auto;
                 margin-right: auto;
             } 
 
-            .btn-group button {
-                background-color: blue;
-                border: 1px solid darkblue; 
+            .btn-group1 button {
+                background-color: grey;
+                border: 1px solid black; 
                 color: white; 
                 padding: 10px 24px;  
                 width: 100px;
                 cursor: pointer; 
                 float: left; 
             }   
+            .btn-group2 button {
+                background-color: yellow;
+                border: 1px solid black; 
+                color: black; 
+                padding: 10px 24px;  
+                width: 100px;
+                cursor: pointer; 
+                float: left; 
+            }  
             .btn-group button:hover {
-                background-color: lightblue;
+                background-color: lightskyblue;
             } 
             input[type="text"] {
                 padding: 20px 30px;
@@ -38,18 +48,19 @@
                 width: 100px;
                 cursor: pointer; 
                 float: left; 
-            }  
+            }   
+            .button2 {background-color: yellow;}
         </style>
     </head>
 <body>   
     <table id="calculator">  
     <tr> 
-        <td colspan="3"><input type="text" id="display"></td> 
+        <td colspan="3"><input type="text" id="display" READONLY></td> 
         
     </tr>
     <tr>  
         <td colspan= "3">
-            <div class = "btn-group">  
+            <div class = "btn-group2">  
                 <button onclick= "disNumber('C')">C</button> 
                 <button onclick= "disNumber('+/-')">+/-</button> 
                 <button onclick= "disNumber('%')">%</button> 
@@ -59,7 +70,7 @@
     </tr> 
     <tr>
         <td colspan="3">
-            <div class = "btn-group">   
+            <div class = "btn-group1">   
                 <button onclick= "disNumber('7')">7</button> 
                 <button onclick= "disNumber('8')">8</button> 
                 <button onclick= "disNumber('9')">9</button> 
@@ -69,7 +80,7 @@
     </tr> 
     <tr>
         <td colspan=3>
-            <div class = "btn-group">   
+            <div class = "btn-group1">   
                 <button onclick= "disNumber('4')">4</button> 
                 <button onclick= "disNumber('5')">5</button> 
                 <button onclick= "disNumber('6')">6</button> 
@@ -79,10 +90,10 @@
     </tr> 
     <tr>
         <td colspan=3>
-            <div class = "btn-group">   
+            <div class = "btn-group1">   
                 <button onclick= "disNumber('1')">1</button> 
                 <button onclick= "disNumber('2')">2</button> 
-                <button onclick= "disNumber('0')">3</button> 
+                <button onclick= "disNumber('3')">3</button> 
                 <button onclick= "disNumber('+')">+</button>
             </div>  
         </td> 
@@ -90,9 +101,9 @@
     </tr> 
     <tr>
         <td colspan=3>
-            <div class = "btn-group">   
+            <div class = "btn-group1">   
                 <button style="width: 200px" onclick="disNumber('0')">0</button>
-                <button onclick= "disNumber('.')">.</button> 
+                <button  onclick= "disNumber('.')">.</button> 
                 <button  onclick= "disNumber('=')">=</button>
             </div>  
         </td> 
@@ -100,43 +111,64 @@
     </tr>
     </table>
     <script>   
-    var num = 0;   
-    var finalR = 0; 
-    var oper = " "; 
+    var num = " ";   
+    var finalR = 0;  
     function disNumber(value){  
         if(!isNaN(value)){ 
             document.getElementById("display").value += value;   
-            num = document.getElementById("display").value; 
-        }  else if (value == "+/-"){ 
+            num = document.getElementById("display").value;  
+            num = num.toString(); 
+        }  else if (value == "+/-"){   
+            num = document.getElementById("display").value;  
             num = num - (num * 2);  
-            document.getElementById("display").value = num; 
+            document.getElementById("display").value = num;  
+            num = num.toString(); 
         } else if (value == "C"){  
             document.getElementById("display").value = " " 
-            num = 0; 
+            num = " ";  
+            finalR = " "; 
         }else if(value == '.'){   
             if(num.indexOf('.') == -1){ 
                 num = num.concat(".");
                 document.getElementById("display").value = num;
             }
-        } else if (value == "+"){ 
-            num = document.getElementById("display").value;  
-            oper = "+";  
-            document.getElementById("display").value = " "  
-        } else if ( value == "-"){ 
-            num = document.getElementById("display").value;  
-            oper = "-";  
-            document.getElementById("display").value = " " 
-        } else if (value == "X"){ 
-            num = document.getElementById("display").value;  
-            oper = "X";  
-            document.getElementById("display").value = " " 
-        } else if (value == "÷"){ 
-            num = document.getElementById("display").value;  
-            oper = "÷";  
-            document.getElementById("display").value = " " 
-        } else if (value == "="){  
-
-            num2 = document.getElementById("display").value; 
+        } else if (value == "+" || value == "-" || value == "X" || value == "÷" || value == "%"){   
+            if(value == "÷"){ 
+                value = "/"; 
+            }
+            if(num.indexOf('+') == -1 ){ 
+                num = document.getElementById("display").value;  
+                num = num.concat(" " + value);   
+                document.getElementById("display").value = " "  
+                finalR = num; 
+            } else if (num.indexOf('-') == -1 ) {  
+                num = document.getElementById("display").value;  
+                num = num.concat(" " + value);   
+                document.getElementById("display").value = " "  
+                finalR = num; 
+            } else if(num.indexOf('X') == -1) {  
+                num = document.getElementById("display").value;  
+                num = num.concat(" " + "*");   
+                document.getElementById("display").value = " "  
+                finalR = num;   
+            } else if (num.indexOf('/') == -1) { 
+                num = document.getElementById("display").value;  
+                num = num.concat(" " + "/");   
+                document.getElementById("display").value = " "  
+                finalR = num;  
+                
+            } else if (num.indexOf('%') == -1) { 
+                num = document.getElementById("display").value;  
+                num = num.concat(" " + "%");   
+                document.getElementById("display").value = " "  
+                finalR = num;   
+            }
+                
+            
+            
+        } else if (value == "="){   
+            finalR = finalR + document.getElementById("display").value;
+            document.getElementById("display").value = eval(finalR); 
 
 
         }
